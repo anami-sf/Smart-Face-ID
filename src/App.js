@@ -24,7 +24,7 @@ class App extends Component {
   }
   
   onRouteChange = (route) => {
-    this.setState({route: {route}})
+    this.setState({route: route})
   }
 
   calculateFaceLocation = (data) => {
