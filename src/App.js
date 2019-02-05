@@ -23,12 +23,8 @@ class App extends Component {
     }
   }
   
-  onRouteChange = () => {
-    if (this.state.route === 'home') {
-      this.setState({route: 'signIn'})
-    }else{
-    this.setState({route: 'home'});
-    }
+  onRouteChange = (route) => {
+    this.setState({route: {route}})
   }
 
   calculateFaceLocation = (data) => {
@@ -80,7 +76,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navigation onRouteChange = {this.onRouteChange} />
+        <Navigation onRouteChange = {this.onRouteChange}/>
         <div style = {{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
           { this.state.route === 'signIn' ?
             <SignIn onRouteChange = {this.onRouteChange}/> :

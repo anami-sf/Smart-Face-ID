@@ -9,7 +9,7 @@ const Navigation = ({onRouteChange}) => {
             className = 'f5 link white dim grow '
             type = 'submit'
             value = 'Sign Out'
-            onClick = {onRouteChange}
+            onClick = {() => onRouteChange('signIn')}
             >
             </input>
         </nav>
