@@ -6,6 +6,7 @@ import Rank from './Components/Rank/Rank.js';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition.js'
 import Clarifai from 'clarifai';
 import SignIn from './Components/SignIn/SignIn.js';
+import Register from './Components/Register/Register.js';
 
 
 const app = new Clarifai.App({
@@ -20,10 +21,15 @@ class App extends Component {
       imageUrl: '',
       box: {},
       route: 'signIn',
+      isSignedIn: false,
     }
   }
   
   onRouteChange = (route) => {
+    route === 'home' ?
+      this.setState({isSignedIn: true})
+      :this.setState({isSignedIn: false})
+
     this.setState({route: route})
   }
 
@@ -31,24 +37,17 @@ class App extends Component {
     const inputImg = document.getElementById('inputImg');
     const width = inputImg.width;
     const height = inputImg.height;
-    console.log(height)
     const box = data.outputs[0].data.regions[0].region_info.bounding_box;
-    console.log(box)
     const top_border = height * box.top_row;
-    console.log(top_border)
     const bottom_border = height * (1 - box.bottom_row);
-    console.log(bottom_border)
     const left_border = width * box.left_col;
-    console.log(left_border)
     const right_border = width * (1 - box.right_col);
-    console.log(right_border)
     const location = {
       top_border: top_border,
       right_border: right_border,
       bottom_border: bottom_border,
       left_border: left_border,
     }
-    console.log(location)
     this.boundingBox(location)
   }
 
@@ -74,17 +73,20 @@ class App extends Component {
   
   
   render() {
+    const { imageUrl, box, isSignedIn, route } = this.state;
     return (
       <div className="App">
-        <Navigation onRouteChange = {this.onRouteChange}/>
+        <Navigation isSignedIn = {isSignedIn} onRouteChange = {this.onRouteChange}/>
         <div style = {{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          { this.state.route === 'signIn' ?
-            <SignIn onRouteChange = {this.onRouteChange}/> :
+          {route === 'signIn' ?
+            <SignIn onRouteChange = {this.onRouteChange}/>
+            : route === 'home' ?
             <div>
               <Rank />
               <ImageLinkForm onInput = {this.onInput} onDetect = {this.onDetect} />
-              <FaceRecognition imageUrl = {this.state.imageUrl} box = {this.state.box} />
+              <FaceRecognition imageUrl = {imageUrl} box = {box} />           
             </div>
+            : <Register onRouteChange = {this.onRouteChange} />
           }
         </div>
       </div>
