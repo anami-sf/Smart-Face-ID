@@ -25,6 +25,13 @@ class App extends Component {
     }
   }
   
+componentDidMount(){
+    fetch('http://localhost:3000')
+      .then(response => response.json())
+      .then(console.log)
+/*   Above line is the shorthand version of:     .then(data => console.log(data)) */
+}
+
   onRouteChange = (route) => {
     route === 'home' ?
       this.setState({isSignedIn: true})
@@ -97,4 +104,4 @@ class App extends Component {
   export default App;
   
   //style = {{display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'middle', justifyContent: 'center'}}
-  
+  //
