@@ -24,13 +24,6 @@ class App extends Component {
       isSignedIn: false,
     }
   }
-  
-componentDidMount(){
-    fetch('http://localhost:3000')
-      .then(response => response.json())
-      .then(console.log)
-/*   Above line is the shorthand version of:     .then(data => console.log(data)) */
-}
 
   onRouteChange = (route) => {
     route === 'home' ?
