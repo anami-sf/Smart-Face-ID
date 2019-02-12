@@ -27,9 +27,14 @@ class SignIn extends Component {
                 password: this.state.signInPassword,
             })
         })
-        this.props.onRouteChange('home');
+            .then(response => response.json())
+            .then(data => {
+                if (data === 'Success') {
+                    this.props.onRouteChange('home');
+                }
+            })
     }
-//
+
     render () {
         const {onRouteChange} = this.props;
         return(
