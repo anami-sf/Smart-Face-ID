@@ -22,7 +22,7 @@ import './FaceRecognition.css';
     
     const FaceRecognition = ({imageUrl, box}) => {
         return(
-            <div className = 'center ma2 ' >
+            <div className = 'center ma2 ' style = {{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignContent: 'center', textAlign: 'center'}}>
                 <div className = 'absolute ' >
                     {/* {displayBorder(imageUrl)} */}
                     <img id='inputImg' alt='' src={imageUrl} width='500px' heigh='auto'/>,

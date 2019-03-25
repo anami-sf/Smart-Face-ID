@@ -13,16 +13,18 @@ const app = new Clarifai.App({
   apiKey: '3e380c5c8f9a4f1ebb28ac1a52aff966'
  });
 
+ const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signIn',
+  isSignedIn: false,
+}
+
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signIn',
-      isSignedIn: false,
-    }
+    this.state = initialState;
   }
 
   loadUser = (data) => {
@@ -36,11 +38,12 @@ class App extends Component {
   }
 
   onRouteChange = (route) => {
-    route === 'home' ?
-      this.setState({isSignedIn: true})
-      :this.setState({isSignedIn: false})
-
-    this.setState({route: route})
+    if (route === 'signout') {
+      this.setState(initialState)
+    } else if (route === 'home') {
+      this.setState({isSignedIn: true}) 
+    }
+    this.setState({route: route});
   }
 
   calculateFaceLocation = (data) => {
@@ -71,8 +74,25 @@ class App extends Component {
   
   onDetect = () => {
     this.setState({imageUrl: this.state.input })
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    app.models
+    .predict(
+      Clarifai.FACE_DETECT_MODEL, 
+      this.state.input)
     .then(response => {
+      if(response) {
+        fetch('http://localhost:3000/image', {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          id: this.state.user.id
+        })
+      })
+        .then(response => response.json())
+        .then(count => {
+          this.setState(Object.assign(this.state.user, { entries: count}))
+        })
+        .catch(console.log)
+      }
       this.calculateFaceLocation(response);
     })
     .catch(err => console.log(err)
@@ -87,7 +107,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation isSignedIn = {isSignedIn} onRouteChange = {this.onRouteChange}/>
-        <div style = {{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+        <div style = {{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', textAlign: 'center'}}>
           {route === 'signIn' ?
             <SignIn loadUser = {this.loadUser} onRouteChange = {this.onRouteChange}/>
             : route === 'home' ?
