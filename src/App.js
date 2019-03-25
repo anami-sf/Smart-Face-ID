@@ -4,14 +4,8 @@ import Navigation from './Components/Navigation/Navigation.js';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm.js';
 import Rank from './Components/Rank/Rank.js';
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition.js'
-import Clarifai from 'clarifai';
 import SignIn from './Components/SignIn/SignIn.js';
 import Register from './Components/Register/Register.js';
-
-
-const app = new Clarifai.App({
-  apiKey: '3e380c5c8f9a4f1ebb28ac1a52aff966'
- });
 
  const initialState = {
   input: '',
@@ -73,12 +67,16 @@ class App extends Component {
   }
   
   onDetect = () => {
-    this.setState({imageUrl: this.state.input })
-    app.models
-    .predict(
-      Clarifai.FACE_DETECT_MODEL, 
-      this.state.input)
-    .then(response => {
+    this.setState({imageUrl: this.state.input});
+      fetch('http://localhost:3000/imageurl', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
+      })
+      .then(response => response.json())
+      .then(response => {
       if(response) {
         fetch('http://localhost:3000/image', {
         method: 'put',
@@ -95,8 +93,7 @@ class App extends Component {
       }
       this.calculateFaceLocation(response);
     })
-    .catch(err => console.log(err)
-    );
+    .catch(err => console.log(err));
   }
 
 //.outputs[0].data.regions[0].region_info.bounding_box)
