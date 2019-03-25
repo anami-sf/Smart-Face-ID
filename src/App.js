@@ -25,6 +25,16 @@ class App extends Component {
     }
   }
 
+  loadUser = (data) => {
+    this.setState({user: {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined
+    }})
+  }
+
   onRouteChange = (route) => {
     route === 'home' ?
       this.setState({isSignedIn: true})
@@ -79,14 +89,14 @@ class App extends Component {
         <Navigation isSignedIn = {isSignedIn} onRouteChange = {this.onRouteChange}/>
         <div style = {{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
           {route === 'signIn' ?
-            <SignIn onRouteChange = {this.onRouteChange}/>
+            <SignIn loadUser = {this.loadUser} onRouteChange = {this.onRouteChange}/>
             : route === 'home' ?
             <div>
-              <Rank />
+              <Rank entries = {this.state.user.entries} name = {this.state.user.name}/>
               <ImageLinkForm onInput = {this.onInput} onDetect = {this.onDetect} />
               <FaceRecognition imageUrl = {imageUrl} box = {box} />           
             </div>
-            : <Register onRouteChange = {this.onRouteChange} />
+            : <Register loadUser = {this.loadUser} onRouteChange = {this.onRouteChange} />
           }
         </div>
       </div>
