@@ -1,3 +1,5 @@
+//'https://smart-face-id.herokuapp.com/register'
+
 import React from 'react';
 
 class Register extends React.Component {
@@ -23,7 +25,7 @@ class Register extends React.Component {
     }
   
     onSubmitSignIn = () => {
-      fetch('http://localhost:3000/register', {
+      fetch('https://smart-face-id.herokuapp.com/register', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -40,6 +42,7 @@ class Register extends React.Component {
           }
         })
     }
+  
   
     render() {
     return(
