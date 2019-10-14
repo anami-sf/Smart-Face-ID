@@ -1,14 +1,18 @@
 # FACE ID
-![App Image](public/face-id.jpg)
-
+Face recognition application.
 
 ## INTRODUCTION
 
-This REACT application integrates 
+This REACT application integrates the Clarifi API which recognizes human faces in images. This is a base layer on which many different types of applicaitions could be built. For example, facial recognition along with demographics reconition could be used in the fields of adversiting to target demographics and security. 
 
-<img src="Account_page.jpg" alt="Accounts" title="Accounts" width="200" height="200" />
+In this application a user can load any image from the internet and the app will dientify human faces. 
 
->[capX - Deployed Page](https://capxexchange.herokuapp.com/)
+This application creates a user prifile for the user and tracks the number of image entries. 
+
+>[Face ID (Deployed Page)](https://smart-face-id-frontend.herokuapp.com/)
+
+![App Image](public/face-id.jpg)
+
 
 ## TECHNOLOGIES
 
@@ -32,6 +36,7 @@ This REACT application integrates
 
 ## PLANNED IMPROVEMENTS
 
+* Store image links in Postgress
 * Display all images loaded by a user
 * Integrate the clarifi API to identify demographics
 
