@@ -1,3 +1,42 @@
+# FACE ID
+![App Image](public/face-id.jpg)
+
+
+## INTRODUCTION
+
+This REACT application integrates 
+
+<img src="Account_page.jpg" alt="Accounts" title="Accounts" width="200" height="200" />
+
+>[capX - Deployed Page](https://capxexchange.herokuapp.com/)
+
+## TECHNOLOGIES
+
+* REACT
+* Clarifi API
+* Javascript
+* Postgres
+* Heroku
+* CSS
+* HTML
+* Trello
+
+
+## TRELLO
+
+>[Trello Board](https://trello.com/b/N88MvJhP/face-id)
+
+## DEPLOYED PAGE
+
+>[Deployed Page](https://smart-face-id-frontend.herokuapp.com/)
+
+## PLANNED IMPROVEMENTS
+
+* Display all images loaded by a user
+* Integrate the clarifi API to identify demographics
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
