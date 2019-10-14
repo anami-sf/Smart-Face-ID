@@ -3,11 +3,11 @@ Face recognition application.
 
 ## INTRODUCTION
 
-This REACT application integrates the Clarifi API which recognizes human faces in images. This is a base layer on which many different types of applicaitions could be built. For example, facial recognition along with demographics reconition could be used in the fields of adversiting to target demographics and security. 
+This REACT application integrates the Clarifi API which recognizes human faces in images. This is a base layer on which many different types of applicaitions could be built. For example, facial recognition along with demographics recognition could be used in the fields of adversiting to target demographics and security. 
 
 In this application a user can load any image from the internet and the app will dientify human faces. 
 
-This application creates a user prifile for the user and tracks the number of image entries. 
+This application creates a user profile for the user and tracks the number of image entries. 
 
 >[Face ID (Deployed Page)](https://smart-face-id-frontend.herokuapp.com/)
 
